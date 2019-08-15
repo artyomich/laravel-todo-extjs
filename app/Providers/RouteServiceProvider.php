@@ -24,8 +24,6 @@ class RouteServiceProvider extends ServiceProvider
     {
         parent::boot($router);
 
-        //Route Model Binding
-        $router->model('user', 'App\User');
     }
 
     /**

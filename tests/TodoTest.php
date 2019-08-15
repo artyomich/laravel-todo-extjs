@@ -1,6 +1,5 @@
 <?php
 
-use App\User;
 use App\Todo;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -10,13 +9,6 @@ class TodoTest extends TestCase
 {
     //use DatabaseMigrations;
 
-    public function setUp()
-    {
-        parent::setUp();
-
-        $user = factory(User::class)->create();
-        $this->actingAs($user);
-    }
 
     /**
      * A basic test example.
@@ -25,13 +17,13 @@ class TodoTest extends TestCase
      */
     public function testSeeTodoList()
     {
-        $this->visit('/todo')
+        $this->visit('/todos')
             ->see('Todo List');
     }
 
     public function testSeeAddTodoFrom()
     {
-        $this->visit('/todo')
+        $this->visit('/todos')
             ->click('Add New Todo')
             ->seePageIs('/todo/create')
             ->see('Create New Todo');

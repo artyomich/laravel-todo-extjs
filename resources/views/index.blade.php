@@ -6,9 +6,7 @@
   <h1>Laravel ToDo App with ExtJs frontend</h1>
   <hr/>
 
-  <a href="/todo">Todo</a>
-
-  @include('partials.flash_notification')
+  <a href="/todos">Todo list</a>
 
  </div>
 

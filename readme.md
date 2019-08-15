@@ -1,6 +1,6 @@
 # Laravel ToDo App
 
-This is a simple ToDo app with multiple user support.
+This is a simple ToDo app.
 
 This is built on Laravel Framework 5.1. This was built for demonstrate purpose.
 
@@ -8,7 +8,7 @@ This is built on Laravel Framework 5.1. This was built for demonstrate purpose.
 
 Clone the repository-
 ```
-git clone https://github.com/milon521/laravel-todo.git
+git clone https://github.com/artyomich/laravel-todo-extjs
 ```
 
 Then cd into the folder with this command-
@@ -51,5 +51,3 @@ php artisan serve
 ```
 
 Then go to `http://localhost:8000` from your browser and see the app.
-
-

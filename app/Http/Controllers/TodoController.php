@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Todo;
-use http\Env\Response;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class TodoController extends Controller
 {
@@ -17,21 +15,13 @@ class TodoController extends Controller
 
     public function index()
     {
-        $todoList = Todo::where('user_id', Auth::id());
 
-        //return view('todo.list', compact('todoList'));
-        return new Response($todoList);
+        $todoList = Todo::All();
+
+        return response()->json(['todos' => $todoList]);
     }
 
-    /**
-     * View Create Form.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function create()
-    {
-        return view('todo.create');
-    }
+
 
     /**
      * Create new Todo.
@@ -46,12 +36,12 @@ class TodoController extends Controller
 
         Todo::create([
             'name' => $request->get('name'),
-            'user_id' => Auth::user()->id,
         ]);
 
-        return redirect('/todo')
-            ->with('flash_notification.message', 'New todo created successfully')
-            ->with('flash_notification.level', 'success');
+        return response()->json([
+            "code" => 200,
+            "message" => "Todo added successfully"
+        ]);
     }
 
     /**
@@ -67,10 +57,10 @@ class TodoController extends Controller
         $todo->complete = !$todo->complete;
         $todo->save();
 
-        return redirect()
-            ->route('todo.index')
-            ->with('flash_notification.message', 'Todo updated successfully')
-            ->with('flash_notification.level', 'success');
+        return response()->json([
+            "code" => 200,
+            "message" => "Todo updated successfully"
+        ]);
     }
 
     /**
@@ -85,9 +75,9 @@ class TodoController extends Controller
         $todo = Todo::findOrFail($id);
         $todo->delete();
 
-        return redirect()
-            ->route('todo.index')
-            ->with('flash_notification.message', 'Todo deleted successfully')
-            ->with('flash_notification.level', 'success');
+        return response()->json([
+            "code" => 200,
+            "message" => "Task deleted successfully"
+        ]);
     }
 }
