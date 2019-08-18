@@ -22,6 +22,37 @@ class TodoController extends Controller
     }
 
 
+    public function store(Request $request)
+    {
+        $this->validate($request, ['id' => 'required']);
+
+        foreach ($request as $item) {
+
+            $id = $item->get('id');
+            $name = $item->get('name');
+            $complete = $item->get('complete');
+
+            $shouldUpdateData = false;
+            $todo = Todo::find($id);
+
+            if (isset($name)) {
+                $todo->name = $name;
+                $shouldUpdateData = true;
+            }
+            if (isset($complete)) {
+                $todo->complete = boolval($complete);
+                $shouldUpdateData = true;
+            }
+            if ($shouldUpdateData) {
+                $todo->save();
+            }
+        }
+
+        return response()->json([
+            "code" => 200,
+            "message" => "Todos updated successfully"
+        ]);
+    }
 
     /**
      * Create new Todo.
@@ -30,19 +61,20 @@ class TodoController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+/*    public function store(Request $request)
     {
         $this->validate($request, ['name' => 'required']);
 
         Todo::create([
             'name' => $request->get('name'),
+            'complete' => false
         ]);
 
         return response()->json([
             "code" => 200,
             "message" => "Todo added successfully"
         ]);
-    }
+    }*/
 
     /**
      * Toggle Status.
@@ -51,11 +83,14 @@ class TodoController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($id)
+    public function update(Request $request)
     {
-        $todo = Todo::findOrFail($id);
-        $todo->complete = !$todo->complete;
+        //dd($request);
+        $this->validate($request, ['name' => 'required']);
+        $todo = Todo::findOrFail($request[0]->id);
+        $todo->complete = true;
         $todo->save();
+
 
         return response()->json([
             "code" => 200,
@@ -77,7 +112,7 @@ class TodoController extends Controller
 
         return response()->json([
             "code" => 200,
-            "message" => "Task deleted successfully"
+            "message" => "Todo deleted successfully"
         ]);
     }
 }

@@ -15,7 +15,7 @@ class Todo extends Model
      * Fillable fields for protecting mass assignment vulnerability
      */
     protected $fillable = [
-        'name',
+        'name', 'id', 'complete'
     ];
 
     /*
