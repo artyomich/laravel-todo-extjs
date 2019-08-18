@@ -45,6 +45,7 @@ Ext.define('SampleApp.view.main.Main', {
             }
         }]
     }],
+
     selModel: 'rowmodel',
     plugins: {
         ptype: 'rowediting',
