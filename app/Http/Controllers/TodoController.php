@@ -21,7 +21,13 @@ class TodoController extends Controller
         return response()->json(['todos' => $todoList]);
     }
 
-
+    /**
+     * Create new Todo.
+     *
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
         $this->validate($request, ['id' => 'required']);
@@ -54,27 +60,6 @@ class TodoController extends Controller
         ]);
     }
 
-    /**
-     * Create new Todo.
-     *
-     * @param Request $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-/*    public function store(Request $request)
-    {
-        $this->validate($request, ['name' => 'required']);
-
-        Todo::create([
-            'name' => $request->get('name'),
-            'complete' => false
-        ]);
-
-        return response()->json([
-            "code" => 200,
-            "message" => "Todo added successfully"
-        ]);
-    }*/
 
     /**
      * Toggle Status.
